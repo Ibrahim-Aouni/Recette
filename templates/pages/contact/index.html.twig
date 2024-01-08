@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymRecipe - Contact{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h1>Formulaire de contact</h1>
+
+        {{ form(form) }}
+
+        <input type="hidden" id="captcha" name="captcha" value="">
+    </div>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcZI0QpAAAAADKo68UZj039pWCYFK3zG6APP8Pt"></script>
+
+    <script>
+        const siteKey = '6LcZI0QpAAAAADKo68UZj039pWCYFK3zG6APP8Pt';
+
+        grecaptcha.ready(function() {
+            grecaptcha.execute(siteKey, { action: 'contact' }).then(function(token) {
+                document.getElementById('captcha').value = token;
+            });
+        });
+    </script>
+{% endblock %}

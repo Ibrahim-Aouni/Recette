@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymRecipe - Recettes de la communauté{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Recettes de la communauté</h1>
+
+        {% if recettes is defined and recettes|length > 0 %}
+            <div class="d-flex justify-content-center flex-wrap">
+                {% for recette in recettes %}
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Recette n°{{ recette.id }}</div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{{ path('recette.show', {id: recette.id}) }}">{{ recette.name }}</a>
+                            </h4>
+                            <p class="card-text">{{ recette.description|slice(0, 100) ~ '...' }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h4>Il n'y a pas de recettes</h4>
+        {% endif %}
+    </div>
+{% endblock %}

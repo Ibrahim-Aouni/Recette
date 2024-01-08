@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	SymRecipe - Inscription
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="mt-4">Formulaire d'inscription</h1>
+
+		
+    {{ form_start(form) }}
+	{{ form_row(form.captcha) }}
+        {{ form_row(form.fullName) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.email) }}
+		{{ form_row(form.plainPassword) }}
+	    {{ form_row(form.submit) }}
+		
+    {{ form_end(form) }}
+
+		</div>
+		
+<script src="https://www.google.com/recaptcha/api.js?render=TON_SITE_KEY"></script>
+<script>
+    const siteKey = 'TON_SITE_KEY';
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute(siteKey, { action: 'contact' }).then(function(token) {
+            document.getElementById('contact_recaptcha').value = token;
+        });
+    });
+</script>
+	{% endblock %}
